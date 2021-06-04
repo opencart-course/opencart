@@ -14,11 +14,6 @@
 		</div>
 	</div>
 	<div class="container-fluid">
-		{% if error_warning %}
-			<div class="alert alert-danger alert-dismissible"><i class="fas fa-exclamation-circle"></i> {{ error_warning }}
-				<button type="button" class="close" data-dismiss="alert">&times;</button>
-			</div>
-		{% endif %}
 		<div class="card">
 			<div class="card-header"><i class="fas fa-pencil-alt"></i> {{ text_edit }}</div>
 			<div class="card-body">
@@ -33,7 +28,7 @@
 						<label for="input-total" class="col-sm-2 col-form-label">{{ entry_total }}</label>
 						<div class="col-sm-10">
 							<input type="text" name="payment_cheque_total" value="{{ payment_cheque_total }}" placeholder="{{ entry_total }}" id="input-total" class="form-control"/>
-							<small class="form-text text-muted">{{ help_total }}</small>
+							<div class="form-text text-muted">{{ help_total }}</div>
 						</div>
 					</div>
 					<div class="row mb-3">

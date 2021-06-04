@@ -6,7 +6,7 @@
 				{% if orders %}
 					<a href="{{ orders }}" data-bs-toggle="tooltip" title="{{ button_order }}" class="btn btn-warning"><i class="fas fa-receipt"></i></a>
 				{% endif %}
-				<button type="button" data-oc-action="{{ save }}" data-oc-form="#customer-form" data-bs-toggle="tooltip" title="{{ button_save }}" class="btn btn-primary"><i class="fas fa-save"></i></button>
+				<button type="button" data-oc-action="{{ save }}" data-oc-form="#form-customer" data-bs-toggle="tooltip" title="{{ button_save }}" class="btn btn-primary"><i class="fas fa-save"></i></button>
 				<a href="{{ back }}" data-bs-toggle="tooltip" title="{{ button_back }}" class="btn btn-light"><i class="fas fa-reply"></i></a></div>
 			<h1>{{ heading_title }}</h1>
 			<ol class="breadcrumb">
@@ -20,7 +20,7 @@
 		<div class="card">
 			<div class="card-header"><i class="fas fa-pencil-alt"></i> {{ text_form }}</div>
 			<div class="card-body">
-				<form id="customer-form">
+				<form id="form-customer">
 					<input type="hidden" name="customer_id" value="{{ customer_id }}" id="input-customer-id"/>
 					<ul class="nav nav-tabs">
 						<li class="nav-item"><a href="#tab-general" data-bs-toggle="tab" class="nav-link active">{{ tab_general }}</a></li>
@@ -111,7 +111,7 @@
 														{% for custom_field_value in custom_field.custom_field_value %}
 															<label class="form-check">
 																{% if account_custom_field[custom_field.custom_field_id] and custom_field_value.custom_field_value_id == account_custom_field[custom_field.custom_field_id] %}
-																	<input type="radio" name="custom_field[{{ custom_field.custom_field_id }}]" value="{{ custom_field_value.custom_field_value_id }}" checked="checked" class="form-check-input"/>
+																	<input type="radio" name="custom_field[{{ custom_field.custom_field_id }}]" value="{{ custom_field_value.custom_field_value_id }}" class="form-check-input" checked="checked"/>
 																	{{ custom_field_value.name }}
 																{% else %}
 																	<input type="radio" name="custom_field[{{ custom_field.custom_field_id }}]" value="{{ custom_field_value.custom_field_value_id }}" class="form-check-input"/>
@@ -131,7 +131,7 @@
 														{% for custom_field_value in custom_field.custom_field_value %}
 															<label class="form-check">
 																{% if account_custom_field[custom_field.custom_field_id] and custom_field_value.custom_field_value_id in account_custom_field[custom_field.custom_field_id] %}
-																	<input type="checkbox" name="custom_field[{{ custom_field.custom_field_id }}][]" value="{{ custom_field_value.custom_field_value_id }}" checked="checked" class="form-check-input"/> {{ custom_field_value.name }}
+																	<input type="checkbox" name="custom_field[{{ custom_field.custom_field_id }}][]" value="{{ custom_field_value.custom_field_value_id }}" class="form-check-input" checked="checked"/> {{ custom_field_value.name }}
 																{% else %}
 																	<input type="checkbox" name="custom_field[{{ custom_field.custom_field_id }}][]" value="{{ custom_field_value.custom_field_value_id }}" class="form-check-input"/> {{ custom_field_value.name }}
 																{% endif %}
@@ -162,7 +162,7 @@
 												<label class="col-sm-2 col-form-label">{{ custom_field.name }}</label>
 												<div class="col-sm-10">
 													<div id="input-custom-field-{{ custom_field.custom_field_id }}">
-														<button type="button" id="button-custom-field-{{ custom_field.custom_field_id }}" data-loading-text="{{ text_loading }}" class="btn btn-light"><i class="fas fa-upload"></i> {{ button_upload }}</button>
+														<button type="button" id="button-custom-field-{{ custom_field.custom_field_id }}" data-oc-loading-text="{{ text_loading }}" class="btn btn-light"><i class="fas fa-upload"></i> {{ button_upload }}</button>
 														<input type="hidden" name="custom_field[{{ custom_field.custom_field_id }}]" value="{{ account_custom_field[custom_field.custom_field_id] ? account_custom_field[custom_field.custom_field_id] }}"/>
 													</div>
 												</div>
@@ -224,13 +224,13 @@
 								<div class="row mb-3">
 									<label class="col-sm-2 col-form-label">{{ entry_newsletter }}</label>
 									<div class="col-sm-10">
-										<div class="btn-group btn-group-toggle" data-bs-toggle="buttons">
+										<div class="btn-group">
 											{% if newsletter %}
-												<label class="btn btn-outline-secondary active"><input type="radio" name="newsletter" value="1" checked="checked"/> {{ text_yes }}</label>
-												<label class="btn btn-outline-secondary"><input type="radio" name="newsletter" value="0"/> {{ text_no }}</label>
+												<label class="btn btn-outline-secondary active"><input type="radio" name="newsletter" value="1" class="btn-check" checked="checked"/> {{ text_yes }}</label>
+												<label class="btn btn-outline-secondary"><input type="radio" name="newsletter" value="0" class="btn-check"/> {{ text_no }}</label>
 											{% else %}
-												<label class="btn btn-outline-secondary"><input type="radio" name="newsletter" value="1"/> {{ text_yes }}</label>
-												<label class="btn btn-outline-secondary active"><input type="radio" name="newsletter" value="0" checked="checked"/> {{ text_no }}</label>
+												<label class="btn btn-outline-secondary"><input type="radio" name="newsletter" value="1" class="btn-check"/> {{ text_yes }}</label>
+												<label class="btn btn-outline-secondary active"><input type="radio" name="newsletter" value="0" class="btn-check" checked="checked"/> {{ text_no }}</label>
 											{% endif %}
 										</div>
 									</div>
@@ -238,13 +238,13 @@
 								<div class="row mb-3">
 									<label class="col-sm-2 col-form-label">{{ entry_status }}</label>
 									<div class="col-sm-10">
-										<div class="btn-group btn-group-toggle" data-bs-toggle="buttons">
+										<div class="btn-group">
 											{% if status %}
-												<label class="btn btn-outline-secondary active"><input type="radio" name="status" value="1" checked="checked"/> {{ text_enabled }}</label>
-												<label class="btn btn-outline-secondary"><input type="radio" name="status" value="0"/> {{ text_disabled }}</label>
+												<label class="btn btn-outline-secondary active"><input type="radio" name="status" value="1" class="btn-check" checked="checked"/> {{ text_enabled }}</label>
+												<label class="btn btn-outline-secondary"><input type="radio" name="status" value="0" class="btn-check"/> {{ text_disabled }}</label>
 											{% else %}
-												<label class="btn btn-outline-secondary"><input type="radio" name="status" value="1"/> {{ text_enabled }}</label>
-												<label class="btn btn-outline-secondary active"><input type="radio" name="status" value="0" checked="checked"/> {{ text_disabled }}</label>
+												<label class="btn btn-outline-secondary"><input type="radio" name="status" value="1" class="btn-check"/> {{ text_enabled }}</label>
+												<label class="btn btn-outline-secondary active"><input type="radio" name="status" value="0" class="btn-check" checked="checked"/> {{ text_disabled }}</label>
 											{% endif %}
 										</div>
 									</div>
@@ -252,16 +252,16 @@
 								<div class="row mb-3">
 									<label class="col-sm-2 col-form-label">{{ entry_safe }}</label>
 									<div class="col-sm-10">
-										<div class="btn-group btn-group-toggle" data-bs-toggle="buttons">
+										<div class="btn-group">
 											{% if safe %}
-												<label class="btn btn-outline-secondary active"><input type="radio" name="safe" value="1" checked="checked"/> {{ text_yes }}</label>
-												<label class="btn btn-outline-secondary"><input type="radio" name="safe" value="0"/> {{ text_no }}</label>
+												<label class="btn btn-outline-secondary active"><input type="radio" name="safe" value="1" class="btn-check" checked="checked"/> {{ text_yes }}</label>
+												<label class="btn btn-outline-secondary"><input type="radio" name="safe" value="0" class="btn-check"/> {{ text_no }}</label>
 											{% else %}
-												<label class="btn btn-outline-secondary"><input type="radio" name="safe" value="1"/> {{ text_yes }}</label>
-												<label class="btn btn-outline-secondary active"><input type="radio" name="safe" value="0" checked="checked"/> {{ text_no }}</label>
+												<label class="btn btn-outline-secondary"><input type="radio" name="safe" value="1" class="btn-check"/> {{ text_yes }}</label>
+												<label class="btn btn-outline-secondary active"><input type="radio" name="safe" value="0" class="btn-check" checked="checked"/> {{ text_no }}</label>
 											{% endif %}
 										</div>
-										<small class="form-text text-muted">{{ help_safe }}</small>
+										<div class="form-text text-muted">{{ help_safe }}</div>
 									</div>
 								</div>
 							</fieldset>
@@ -365,7 +365,7 @@
 															{% for custom_field_value in custom_field.custom_field_value %}
 																<label class="form-check">
 																	{% if address.custom_field[custom_field.custom_field_id] and custom_field_value.custom_field_value_id == address.custom_field[custom_field.custom_field_id] %}
-																		<input type="radio" name="address[{{ address_row }}][custom_field][{{ custom_field.custom_field_id }}]" value="{{ custom_field_value.custom_field_value_id }}" checked="checked" class="form-check-input"/>
+																		<input type="radio" name="address[{{ address_row }}][custom_field][{{ custom_field.custom_field_id }}]" value="{{ custom_field_value.custom_field_value_id }}" class="form-check-input" checked="checked"/>
 																		{{ custom_field_value.name }}
 																	{% else %}
 																		<input type="radio" name="address[{{ address_row }}][custom_field][{{ custom_field.custom_field_id }}]" value="{{ custom_field_value.custom_field_value_id }}" class="form-check-input"/>
@@ -386,7 +386,7 @@
 															{% for custom_field_value in custom_field.custom_field_value %}
 																<label class="form-check">
 																	{% if address.custom_field[custom_field.custom_field_id] and custom_field_value.custom_field_value_id in address.custom_field[custom_field.custom_field_id] %}
-																		<input type="checkbox" name="address[{{ address_row }}][custom_field][{{ custom_field.custom_field_id }}][]" value="{{ custom_field_value.custom_field_value_id }}" checked="checked" class="form-check-input"/>
+																		<input type="checkbox" name="address[{{ address_row }}][custom_field][{{ custom_field.custom_field_id }}][]" value="{{ custom_field_value.custom_field_value_id }}" class="form-check-input" checked="checked"/>
 																		{{ custom_field_value.name }}
 																	{% else %}
 																		<input type="checkbox" name="address[{{ address_row }}][custom_field][{{ custom_field.custom_field_id }}][]" value="{{ custom_field_value.custom_field_value_id }}" class="form-check-input"/>
@@ -419,7 +419,7 @@
 													<label class="col-sm-2 col-form-label">{{ custom_field.name }}</label>
 													<div class="col-sm-10">
 														<div id="input-address-{{ address_row }}-custom-field-{{ custom_field.custom_field_id }}">
-															<button type="button" id="button-custom-field-{{ address_row }}-{{ custom_field.custom_field_id }}" data-loading-text="{{ text_loading }}" class="btn btn-light"><i class="fas fa-upload"></i> {{ button_upload }}</button>
+															<button type="button" id="button-custom-field-{{ address_row }}-{{ custom_field.custom_field_id }}" data-oc-loading-text="{{ text_loading }}" class="btn btn-light"><i class="fas fa-upload"></i> {{ button_upload }}</button>
 															<input type="hidden" name="address[{{ address_row }}][custom_field][{{ custom_field.custom_field_id }}]" value="{{ address.custom_field[custom_field.custom_field_id] ? address.custom_field[custom_field.custom_field_id] }}"/>
 														</div>
 													</div>
@@ -463,13 +463,11 @@
 									<div class="row mb-3">
 										<label class="col-sm-2 col-form-label">{{ entry_default }}</label>
 										<div class="col-sm-10">
-											<label class="form-check">
-												{% if default == address_row %}
-													<input type="radio" name="default" value="{{ address_row }}" checked="checked" class="form-check-input"/>
-												{% else %}
-													<input type="radio" name="default" value="{{ address_row }}" class="form-check-input"/>
-												{% endif %}
-											</label>
+											{% if default == address_row %}
+												<input type="radio" name="default" value="{{ address_row }}" class="form-check-input" checked="checked"/>
+											{% else %}
+												<input type="radio" name="default" value="{{ address_row }}" class="form-check-input"/>
+											{% endif %}
 										</div>
 									</div>
 								</fieldset>
@@ -479,78 +477,76 @@
 								<button type="button" id="button-address" class="btn btn-primary"><i class="fas fa-plus-circle"></i> {{ button_address_add }}</button>
 							</div>
 						</div>
-						{% if customer_id %}
-							<div id="tab-history" class="tab-pane">
-								<fieldset>
-									<legend>{{ text_history }}</legend>
-									<div id="history"></div>
-								</fieldset>
-								<br/>
-								<fieldset>
-									<legend>{{ text_history_add }}</legend>
-									<div class="row mb-3">
-										<label for="input-comment" class="col-sm-2 col-form-label">{{ entry_comment }}</label>
-										<div class="col-sm-10">
-											<textarea name="comment" rows="8" placeholder="{{ entry_comment }}" id="input-comment" class="form-control"></textarea>
-										</div>
+						<div id="tab-history" class="tab-pane">
+							<fieldset>
+								<legend>{{ text_history }}</legend>
+								<div id="history"></div>
+							</fieldset>
+							<br/>
+							<fieldset>
+								<legend>{{ text_history_add }}</legend>
+								<div class="row mb-3">
+									<label for="input-comment" class="col-sm-2 col-form-label">{{ entry_comment }}</label>
+									<div class="col-sm-10">
+										<textarea name="comment" rows="8" placeholder="{{ entry_comment }}" id="input-comment" class="form-control"></textarea>
 									</div>
-								</fieldset>
-								<div class="text-end">
-									<button id="button-history" data-loading-text="{{ text_loading }}" class="btn btn-primary"><i class="fas fa-plus-circle"></i> {{ button_history_add }}</button>
 								</div>
+							</fieldset>
+							<div class="text-end">
+								<button id="button-history" data-oc-loading-text="{{ text_loading }}" class="btn btn-primary"><i class="fas fa-plus-circle"></i> {{ button_history_add }}</button>
 							</div>
-							<div id="tab-transaction" class="tab-pane">
-								<fieldset>
-									<legend>{{ text_transaction }}</legend>
-									<div id="transaction"></div>
-								</fieldset>
-								<br/>
-								<fieldset>
-									<legend>{{ text_transaction_add }}</legend>
-									<div class="row mb-3">
-										<label for="input-transaction-description" class="col-sm-2 col-form-label">{{ entry_description }}</label>
-										<div class="col-sm-10">
-											<input type="text" name="description" value="" placeholder="{{ entry_description }}" id="input-transaction-description" class="form-control"/>
-										</div>
+						</div>
+						<div id="tab-transaction" class="tab-pane">
+							<fieldset>
+								<legend>{{ text_transaction }}</legend>
+								<div id="transaction"></div>
+							</fieldset>
+							<br/>
+							<fieldset>
+								<legend>{{ text_transaction_add }}</legend>
+								<div class="row mb-3">
+									<label for="input-transaction-description" class="col-sm-2 col-form-label">{{ entry_description }}</label>
+									<div class="col-sm-10">
+										<input type="text" name="description" value="" placeholder="{{ entry_description }}" id="input-transaction-description" class="form-control"/>
 									</div>
-									<div class="row mb-3">
-										<label for="input-amount" class="col-sm-2 col-form-label">{{ entry_amount }}</label>
-										<div class="col-sm-10">
-											<input type="text" name="amount" value="" placeholder="{{ entry_amount }}" id="input-amount" class="form-control"/>
-										</div>
-									</div>
-								</fieldset>
-								<div class="text-end">
-									<button type="button" id="button-transaction" data-loading-text="{{ text_loading }}" class="btn btn-primary"><i class="fas fa-plus-circle"></i> {{ button_transaction_add }}</button>
 								</div>
-							</div>
-							<div id="tab-reward" class="tab-pane">
-								<fieldset>
-									<legend>{{ text_reward }}</legend>
-									<div id="reward"></div>
-								</fieldset>
-								<br/>
-								<fieldset>
-									<legend>{{ text_reward_add }}</legend>
-									<div class="row mb-3">
-										<label for="input-reward-description" class="col-sm-2 col-form-label">{{ entry_description }}</label>
-										<div class="col-sm-10">
-											<input type="text" name="description" value="" placeholder="{{ entry_description }}" id="input-reward-description" class="form-control"/>
-										</div>
+								<div class="row mb-3">
+									<label for="input-amount" class="col-sm-2 col-form-label">{{ entry_amount }}</label>
+									<div class="col-sm-10">
+										<input type="text" name="amount" value="" placeholder="{{ entry_amount }}" id="input-amount" class="form-control"/>
 									</div>
-									<div class="row mb-3">
-										<label for="input-points" class="col-sm-2 col-form-label">{{ entry_points }}</label>
-										<div class="col-sm-10">
-											<input type="text" name="points" value="" placeholder="{{ entry_points }}" id="input-points" class="form-control"/>
-											<small class="form-text text-muted">{{ help_points }}</small>
-										</div>
-									</div>
-								</fieldset>
-								<div class="text-end">
-									<button type="button" id="button-reward" data-loading-text="{{ text_loading }}" class="btn btn-primary"><i class="fas fa-plus-circle"></i> {{ button_reward_add }}</button>
 								</div>
+							</fieldset>
+							<div class="text-end">
+								<button type="button" id="button-transaction" data-oc-loading-text="{{ text_loading }}" class="btn btn-primary"><i class="fas fa-plus-circle"></i> {{ button_transaction_add }}</button>
 							</div>
-						{% endif %}
+						</div>
+						<div id="tab-reward" class="tab-pane">
+							<fieldset>
+								<legend>{{ text_reward }}</legend>
+								<div id="reward"></div>
+							</fieldset>
+							<br/>
+							<fieldset>
+								<legend>{{ text_reward_add }}</legend>
+								<div class="row mb-3">
+									<label for="input-reward-description" class="col-sm-2 col-form-label">{{ entry_description }}</label>
+									<div class="col-sm-10">
+										<input type="text" name="description" value="" placeholder="{{ entry_description }}" id="input-reward-description" class="form-control"/>
+									</div>
+								</div>
+								<div class="row mb-3">
+									<label for="input-reward-points" class="col-sm-2 col-form-label">{{ entry_points }}</label>
+									<div class="col-sm-10">
+										<input type="text" name="points" value="" placeholder="{{ entry_points }}" id="input-reward-points" class="form-control"/>
+										<div class="form-text text-muted">{{ help_points }}</div>
+									</div>
+								</div>
+							</fieldset>
+							<div class="text-end">
+								<button type="button" id="button-reward" data-oc-loading-text="{{ text_loading }}" class="btn btn-primary"><i class="fas fa-plus-circle"></i> {{ button_reward_add }}</button>
+							</div>
+						</div>
 						<div id="tab-ip" class="tab-pane">
 							<fieldset>
 								<legend>{{ text_ip }}</legend>
@@ -726,7 +722,7 @@ $('#button-address').on('click', function(e) {
     html += '		  <label class="col-sm-2 col-form-label">{{ custom_field.name|e('js') }}</label>';
     html += '		  <div class="col-sm-10">';
     html += '		    <div id="input-address-' + address_row + '-custom-field-{{ custom_field.custom_field_id }}">';
-    html += '		      <button type="button" id="button-custom-field-' + address_row + '-{{ custom_field.custom_field_id }}" data-loading-text="{{ text_loading }}" class="btn btn-light"><i class="fas fa-upload"></i> {{ button_upload }}</button>';
+    html += '		      <button type="button" id="button-custom-field-' + address_row + '-{{ custom_field.custom_field_id }}" data-oc-loading-text="{{ text_loading }}" class="btn btn-light"><i class="fas fa-upload"></i> {{ button_upload }}</button>';
     html += '		      <input type="hidden" name="address[' + address_row + '][{{ custom_field.custom_field_id }}]" value=""/>';
     html += '		    </div>';
     html += '		  </div>';
@@ -765,7 +761,7 @@ $('#button-address').on('click', function(e) {
 
     html += '  <div class="row mb-3">';
     html += '    <label class="col-sm-2 col-form-label">{{ entry_default }}</label>';
-    html += '    <div class="col-sm-10"><label class="form-check"><input type="radio" name="default" value="' + address_row + '" class="form-check-input"/></label></div>';
+    html += '    <div class="col-sm-10"><input type="radio" name="default" value="' + address_row + '" class="form-check-input"/></div>';
     html += '  </div>';
 
     html += '</fieldset>';
@@ -794,17 +790,17 @@ $('#button-address').on('click', function(e) {
         'allowInputToggle': true
     });
 
-    $('#address-row-' + address_row + ' .form-group[data-sort]').detach().each(function() {
-        if ($(this).attr('data-sort') >= 0 && $(this).attr('data-sort') <= $('#address-row-' + address_row + ' .form-group').length) {
-            $('#address-row-' + address_row + ' .form-group').eq($(this).attr('data-sort')).before(this);
+    $('#address-row-' + address_row + ' [data-sort]').detach().each(function() {
+        if ($(this).attr('data-sort') >= 0 && $(this).attr('data-sort') <= $('#address-row-' + address_row + ' .row.mb-3').length) {
+            $('#address-row-' + address_row + ' [data-sort]').eq($(this).attr('data-sort')).before(this);
         }
 
-        if ($(this).attr('data-sort') > $('#address-row-' + address_row + ' .form-group').length) {
-            $('#address-row-' + address_row + ' .form-group:last').after(this);
+        if ($(this).attr('data-sort') > $('#address-row-' + address_row + ' .row.mb-3').length) {
+            $('#address-row-' + address_row + ' [data-sort]:last').after(this);
         }
 
-        if ($(this).attr('data-sort') < -$('#address-row-' + address_row + ' .form-group').length) {
-            $('#address-row-' + address_row + ' .form-group:first').before(this);
+        if ($(this).attr('data-sort') < -$('#address-row-' + address_row + ' .row.mb-3').length) {
+            $('#address-row-' + address_row + ' [data-sort]:first').before(this);
         }
     });
 
@@ -904,13 +900,13 @@ $('#history').on('click', '.pagination a', function(e) {
     $('#history').load(this.href);
 });
 
-$('#history').load('index.php?route=customer/customer|history&user_token={{ user_token }}&customer_id={{ customer_id }}');
+$('#history').load('index.php?route=customer/customer|history&user_token={{ user_token }}&customer_id=' + $('input[name=\'customer_id\']').val());
 
 $('#button-history').on('click', function(e) {
     e.preventDefault();
 
     $.ajax({
-        url: 'index.php?route=customer/customer|addhistory&user_token={{ user_token }}&customer_id={{ customer_id }}',
+        url: 'index.php?route=customer/customer|addhistory&user_token={{ user_token }}&customer_id=' + $('input[name=\'customer_id\']').val(),
         type: 'post',
         dataType: 'json',
         data: 'comment=' + encodeURIComponent($('#tab-history textarea[name=\'comment\']').val()),
@@ -924,11 +920,11 @@ $('#button-history').on('click', function(e) {
             $('.alert-dismissible').remove();
 
             if (json['error']) {
-                $('#tab-history').prepend('<div class="alert alert-danger alert-dismissible"><i class="fas fa-exclamation-circle"></i> ' + json['error'] + ' <button type="button" class="btn-close" data-bs-dismiss="alert">&times;</button></div>');
+                $('#tab-history').prepend('<div class="alert alert-danger alert-dismissible"><i class="fas fa-exclamation-circle"></i> ' + json['error'] + ' <button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>');
             }
 
             if (json['success']) {
-                $('#tab-history').prepend('<div class="alert alert-success alert-dismissible"><i class="fas fa-check-circle"></i> ' + json['success'] + ' <button type="button" class="btn-close" data-bs-dismiss="alert">&times;</button></div>');
+                $('#tab-history').prepend('<div class="alert alert-success alert-dismissible"><i class="fas fa-check-circle"></i> ' + json['success'] + ' <button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>');
 
                 $('#history').load('index.php?route=customer/customer|history&user_token={{ user_token }}&customer_id={{ customer_id }}');
 
@@ -948,13 +944,13 @@ $('#transaction').on('click', '.pagination a', function(e) {
     $('#transaction').load(this.href);
 });
 
-$('#transaction').load('index.php?route=customer/customer|transaction&user_token={{ user_token }}&customer_id={{ customer_id }}');
+$('#transaction').load('index.php?route=customer/customer|transaction&user_token={{ user_token }}&customer_id=' + $('input[name=\'customer_id\']').val());
 
 $('#button-transaction').on('click', function(e) {
     e.preventDefault();
 
     $.ajax({
-        url: 'index.php?route=customer/customer|addtransaction&user_token={{ user_token }}&customer_id={{ customer_id }}',
+        url: 'index.php?route=customer/customer|addtransaction&user_token={{ user_token }}&customer_id=' + $('input[name=\'customer_id\']').val(),
         type: 'post',
         dataType: 'json',
         data: 'description=' + encodeURIComponent($('#tab-transaction input[name=\'description\']').val()) + '&amount=' + encodeURIComponent($('#tab-transaction input[name=\'amount\']').val()),
@@ -968,13 +964,13 @@ $('#button-transaction').on('click', function(e) {
             $('.alert-dismissible').remove();
 
             if (json['error']) {
-                $('#tab-transaction').prepend('<div class="alert alert-danger alert-dismissible"><i class="fas fa-exclamation-circle"></i> ' + json['error'] + ' <button type="button" class="btn-close" data-bs-dismiss="alert">&times;</button></div>');
+                $('#tab-transaction').prepend('<div class="alert alert-danger alert-dismissible"><i class="fas fa-exclamation-circle"></i> ' + json['error'] + ' <button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>');
             }
 
             if (json['success']) {
-                $('#tab-transaction').prepend('<div class="alert alert-success alert-dismissible"><i class="fas fa-check-circle"></i> ' + json['success'] + ' <button type="button" class="btn-close" data-bs-dismiss="alert">&times;</button></div>');
+                $('#tab-transaction').prepend('<div class="alert alert-success alert-dismissible"><i class="fas fa-check-circle"></i> ' + json['success'] + ' <button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>');
 
-                $('#transaction').load('index.php?route=customer/customer|transaction&user_token={{ user_token }}&customer_id={{ customer_id }}');
+                $('#transaction').load('index.php?route=customer/customer|transaction&user_token={{ user_token }}&customer_id=' + $('input[name=\'customer_id\']').val());
 
                 $('#tab-transaction input[name=\'amount\']').val('');
                 $('#tab-transaction input[name=\'description\']').val('');
@@ -993,13 +989,13 @@ $('#reward').on('click', '.pagination a', function(e) {
     $('#reward').load(this.href);
 });
 
-$('#reward').load('index.php?route=customer/customer|reward&user_token={{ user_token }}&customer_id={{ customer_id }}');
+$('#reward').load('index.php?route=customer/customer|reward&user_token={{ user_token }}&customer_id=' + $('input[name=\'customer_id\']').val());
 
 $('#button-reward').on('click', function(e) {
     e.preventDefault();
 
     $.ajax({
-        url: 'index.php?route=customer/customer|addreward&user_token={{ user_token }}&customer_id={{ customer_id }}',
+        url: 'index.php?route=customer/customer|addreward&user_token={{ user_token }}&customer_id=' + $('input[name=\'customer_id\']').val(),
         type: 'post',
         dataType: 'json',
         data: 'description=' + encodeURIComponent($('#tab-reward input[name=\'description\']').val()) + '&points=' + encodeURIComponent($('#tab-reward input[name=\'points\']').val()),
@@ -1013,13 +1009,13 @@ $('#button-reward').on('click', function(e) {
             $('.alert-dismissible').remove();
 
             if (json['error']) {
-                $('#tab-reward').prepend('<div class="alert alert-danger alert-dismissible"><i class="fas fa-exclamation-circle"></i> ' + json['error'] + ' <button type="button" class="btn-close" data-bs-dismiss="alert">&times;</button></div>');
+                $('#tab-reward').prepend('<div class="alert alert-danger alert-dismissible"><i class="fas fa-exclamation-circle"></i> ' + json['error'] + ' <button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>');
             }
 
             if (json['success']) {
-                $('#tab-reward').prepend('<div class="alert alert-success alert-dismissible"><i class="fas fa-check-circle"></i> ' + json['success'] + ' <button type="button" class="btn-close" data-bs-dismiss="alert">&times;</button></div>');
+                $('#tab-reward').prepend('<div class="alert alert-success alert-dismissible"><i class="fas fa-check-circle"></i> ' + json['success'] + ' <button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>');
 
-                $('#reward').load('index.php?route=customer/customer|reward&user_token={{ user_token }}&customer_id={{ customer_id }}');
+                $('#reward').load('index.php?route=customer/customer|reward&user_token={{ user_token }}&customer_id=' + $('input[name=\'customer_id\']').val());
 
                 $('#tab-reward input[name=\'points\']').val('');
                 $('#tab-reward input[name=\'description\']').val('');
@@ -1037,14 +1033,14 @@ $('#ip').on('click', '.pagination a', function(e) {
     $('#ip').load(this.href);
 });
 
-$('#ip').load('index.php?route=customer/customer|ip&user_token={{ user_token }}&customer_id={{ customer_id }}');
+$('#ip').load('index.php?route=customer/customer|ip&user_token={{ user_token }}&customer_id=' + $('input[name=\'customer_id\']').val());
 
 $('#content').on('click', 'button[id^=\'button-custom-field\']', function() {
     var element = this;
 
     $('#upload-form').remove();
 
-    $('body').prepend('<form enctype="multipart/form-data" id="upload-form" style="display: none;"><input type="file" name="file" /></form>');
+    $('body').prepend('<form enctype="multipart/form-data" id="form-upload" style="display: none;"><input type="file" name="file" /></form>');
 
     $('#upload-form input[name=\'file\']').trigger('click');
 
@@ -1122,33 +1118,33 @@ $('.datetime').datetimepicker({
 // Sort the custom fields
 {% set address_row = 0 %}
 {% for address in addresses %}
-$('#address-row-{{ address_row }} .form-group[data-sort]').detach().each(function() {
-    if ($(this).attr('data-sort') >= 0 && $(this).attr('data-sort') <= $('#address-row-{{ address_row }} .form-group').length) {
-        $('#address-row-{{ address_row }} .form-group').eq($(this).attr('data-sort')).before(this);
+$('#address-row-{{ address_row }} [data-sort]').detach().each(function() {
+    if ($(this).attr('data-sort') >= 0 && $(this).attr('data-sort') <= $('#address-row-{{ address_row }} .row.mb-3').length) {
+        $('#address-row-{{ address_row }} .row.mb-3').eq($(this).attr('data-sort')).before(this);
     }
 
-    if ($(this).attr('data-sort') > $('#address-row-{{ address_row }} .form-group').length) {
-        $('#address-row-{{ address_row }} .form-group:last').after(this);
+    if ($(this).attr('data-sort') > $('#address-row-{{ address_row }} .row.mb-3').length) {
+        $('#address-row-{{ address_row }} .row.mb-3:last').after(this);
     }
 
-    if ($(this).attr('data-sort') < -$('#address-row-{{ address_row }} .form-group').length) {
-        $('#address-row-{{ address_row }} .form-group:first').before(this);
+    if ($(this).attr('data-sort') < -$('#address-row-{{ address_row }} .row.mb-3').length) {
+        $('#address-row-{{ address_row }} .row.mb-3:first').before(this);
     }
 });
 {% set address_row = address_row + 1 %}
 {% endfor %}
 
-$('#tab-customer .form-group[data-sort]').detach().each(function() {
-    if ($(this).attr('data-sort') >= 0 && $(this).attr('data-sort') <= $('#tab-customer .form-group').length) {
-        $('#tab-customer .form-group').eq($(this).attr('data-sort')).before(this);
+$('#tab-customer [data-sort]').detach().each(function() {
+    if ($(this).attr('data-sort') >= 0 && $(this).attr('data-sort') <= $('#tab-customer .row.mb-3').length) {
+        $('#tab-customer .row.mb-3').eq($(this).attr('data-sort')).before(this);
     }
 
-    if ($(this).attr('data-sort') > $('#tab-customer .form-group').length) {
-        $('#tab-customer .form-group:last').after(this);
+    if ($(this).attr('data-sort') > $('#tab-customer .row.mb-3').length) {
+        $('#tab-customer .row.mb-3:last').after(this);
     }
 
-    if ($(this).attr('data-sort') < -$('#tab-customer .form-group').length) {
-        $('#tab-customer .form-group:first').before(this);
+    if ($(this).attr('data-sort') < -$('#tab-customer .row.mb-3').length) {
+        $('#tab-customer .row.mb-3:first').before(this);
     }
 });
 //--></script>

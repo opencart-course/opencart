@@ -17,18 +17,18 @@
 	</div>
 	<div class="container-fluid">
 		<div class="row">
-			<div id="filter-customer" class="col-md-3 col-sm-12 order-md-9 d-none d-md-block mb-3">
+			<div id="filter-customer" class="col-md-3 col-sm-12 order-lg-last d-none d-md-block mb-3">
 				<div class="card">
 					<div class="card-header"><i class="fas fa-filter"></i> {{ text_filter }}</div>
 					<div class="card-body">
 						<div class="mb-3">
-							<label class="col-form-label">{{ entry_customer }}</label> <input type="text" name="filter_customer" value="" placeholder="{{ entry_customer }}" id="input-customer" class="form-control"/>
+							<label class="form-label">{{ entry_customer }}</label> <input type="text" name="filter_customer" value="" placeholder="{{ entry_customer }}" id="input-customer" class="form-control"/>
 						</div>
 						<div class="mb-3">
-							<label class="col-form-label">{{ entry_email }}</label> <input type="text" name="filter_email" value="" placeholder="{{ entry_email }}" id="input-email" class="form-control"/>
+							<label class="form-label">{{ entry_email }}</label> <input type="text" name="filter_email" value="" placeholder="{{ entry_email }}" id="input-email" class="form-control"/>
 						</div>
 						<div class="mb-3">
-							<label for="input-customer-group" class="col-form-label">{{ entry_customer_group }}</label> <select name="filter_customer_group_id" id="input-customer-group" class="form-select">
+							<label for="input-customer-group" class="form-label">{{ entry_customer_group }}</label> <select name="filter_customer_group_id" id="input-customer-group" class="form-select">
 								<option value=""></option>
 								{% for customer_group in customer_groups %}
 									<option value="{{ customer_group.customer_group_id }}">{{ customer_group.name }}</option>
@@ -36,20 +36,20 @@
 							</select>
 						</div>
 						<div class="mb-3">
-							<label for="input-type" class="col-form-label">{{ entry_type }}</label> <select name="filter_type" id="input-type" class="form-select">
+							<label for="input-type" class="form-label">{{ entry_type }}</label> <select name="filter_type" id="input-type" class="form-select">
 								<option value=""></option>
 								<option value="customer">{{ text_customer }}</option>
 								<option value="affiliate">{{ text_affiliate }}</option>
 							</select>
 						</div>
 						<div class="mb-3">
-							<label for="input-date-added" class="col-form-label">{{ entry_date_added }}</label>
+							<label for="input-date-added" class="form-label">{{ entry_date_added }}</label>
 							<div class="input-group date">
 								<input type="text" name="filter_date_added" value="" placeholder="{{ entry_date_added }}" id="input-date-added" class="form-control"/>
 								<div class="input-group-text"><i class="fas fa-calendar"></i></div>
 							</div>
 						</div>
-						<div class="mb-3 text-end">
+						<div class="text-end">
 							<button type="button" id="button-filter" class="btn btn-light"><i class="fas fa-filter"></i> {{ button_filter }}</button>
 						</div>
 					</div>
@@ -95,13 +95,13 @@ $('#button-approve, #button-deny, #button-delete').on('click', function(e) {
             $('.alert-dismissible').remove();
 
             if (json['error']) {
-                $('#gdpr').before('<div class="alert alert-danger alert-dismissible"><i class="fas fa-exclamation-circle"></i> ' + json['error'] + ' <button type="button" class="btn-close" data-bs-dismiss="alert">&times;</button></div>');
+                $('#content > .container-fluid').prepend('<div class="alert alert-danger alert-dismissible"><i class="fas fa-exclamation-circle"></i> ' + json['error'] + ' <button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>');
             }
 
             if (json['success']) {
-                $('#gdpr').before('<div class="alert alert-success alert-dismissible"><i class="fas fa-check-circle"></i> ' + json['success'] + ' <button type="button" class="btn-close" data-bs-dismiss="alert">&times;</button></div>');
+                $('#content > .container-fluid').prepend('<div class="alert alert-success alert-dismissible"><i class="fas fa-check-circle"></i> ' + json['success'] + ' <button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>');
 
-                $('#gdpr').load('index.php?route=customer/gdpr|list&user_token={{ user_token }}');
+                $('#customer-approval').load('index.php?route=customer/gdpr|list&user_token={{ user_token }}');
             }
         },
         error: function(xhr, ajaxOptions, thrownError) {
@@ -128,13 +128,13 @@ $('#customer-approval').on('click', '.btn-success, .btn-danger', function(e) {
             $('.alert-dismissible').remove();
 
             if (json['error']) {
-                $('#customer-approval').before('<div class="alert alert-danger alert-dismissible"><i class="fas fa-exclamation-circle"></i> ' + json['error'] + ' <button type="button" class="btn-close" data-bs-dismiss="alert">&times;</button></div>');
+                $('#content > .container-fluid').prepend('<div class="alert alert-danger alert-dismissible"><i class="fas fa-exclamation-circle"></i> ' + json['error'] + ' <button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>');
             }
 
             if (json['success']) {
-                $('#customer-approval').load('index.php?route=customer/customer_approval|list&user_token={{ user_token }}');
+                $('#content > .container-fluid').prepend('<div class="alert alert-success alert-dismissible"><i class="fas fa-check-circle"></i> ' + json['success'] + ' <button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>');
 
-                $('#customer-approval').before('<div class="alert alert-success alert-dismissible"><i class="fas fa-check-circle"></i> ' + json['success'] + ' <button type="button" class="btn-close" data-bs-dismiss="alert">&times;</button></div>');
+                $('#customer-approval').load('index.php?route=customer/customer_approval|list&user_token={{ user_token }}');
             }
         },
         error: function(xhr, ajaxOptions, thrownError) {

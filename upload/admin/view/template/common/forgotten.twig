@@ -12,7 +12,7 @@
 					<div id="forgotten" class="card-body">
 						<p>{{ text_email }}</p>
 						<div class="mb-3">
-							<label for="input-email" class="col-form-label">{{ entry_email }}</label>
+							<label for="input-email" class="form-label">{{ entry_email }}</label>
 							<div class="input-group">
 								<div class="input-group-text"><i class="fas fa-envelope"></i></div>
 								<input type="text" name="email" value="" placeholder="{{ entry_email }}" id="input-email" class="form-control"/>
@@ -33,7 +33,7 @@ $('#button-reset').on('click', function() {
     var element = this;
 
     $.ajax({
-        url: 'index.php?route=common/forgotten|reset',
+        url: 'index.php?route=common/forgotten|confirm',
         type: 'post',
         data: $('#forgotten :input'),
         dataType: 'json',
@@ -47,7 +47,7 @@ $('#button-reset').on('click', function() {
             $('.alert-dismissible').remove();
 
             if (json['error']) {
-                $('#forgotten').prepend('<div class="alert alert-danger alert-dismissible"><i class="fas fa-exclamation-circle"></i> ' + json['error'] + ' <button type="button" class="btn-close" data-bs-dismiss="alert">&times;</button></div>');
+                $('#forgotten').prepend('<div class="alert alert-danger alert-dismissible"><i class="fas fa-exclamation-circle"></i> ' + json['error'] + ' <button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>');
             }
 
             if (json['redirect']) {

@@ -3,7 +3,7 @@
 	<div class="page-header">
 		<div class="container-fluid">
 			<div class="float-end">
-				<button type="button" data-oc-action="{{ save }}" data-oc-form="#custom-field-form" data-bs-toggle="tooltip" title="{{ button_save }}" class="btn btn-primary"><i class="fas fa-save"></i></button>
+				<button type="button" data-oc-action="{{ save }}" data-oc-form="#form-custom-field" data-bs-toggle="tooltip" title="{{ button_save }}" class="btn btn-primary"><i class="fas fa-save"></i></button>
 				<a href="{{ back }}" data-bs-toggle="tooltip" title="{{ button_back }}" class="btn btn-light"><i class="fas fa-reply"></i></a></div>
 			<h1>{{ heading_title }}</h1>
 			<ol class="breadcrumb">
@@ -17,7 +17,7 @@
 		<div class="card">
 			<div class="card-header"><i class="fas fa-pencil-alt"></i> {{ text_form }}</div>
 			<div class="card-body">
-				<form id="custom-field-form">
+				<form id="form-custom-field">
 					<input type="hidden" name="custom_field_id" value="{{ custom_field_id }}" id="input-custom-field-id"/>
 					<fieldset>
 						<legend>{{ text_custom_field }}</legend>
@@ -124,7 +124,7 @@
 							<label for="input-validation" class="col-sm-2 col-form-label">{{ entry_validation }}</label>
 							<div class="col-sm-10">
 								<input type="text" name="validation" id="input-validation" value="{{ validation }}" placeholder="{{ text_regex }}" class="form-control"/>
-								<small class="form-text text-muted">{{ help_regex }}</small>
+								<div class="form-text text-muted">{{ help_regex }}</div>
 							</div>
 						</div>
 						<div class="row mb-3">
@@ -135,7 +135,7 @@
 									{% for customer_group in customer_groups %}
 										<label class="form-check">
 											{% if customer_group.customer_group_id in custom_field_customer_group %}
-												<input type="checkbox" name="custom_field_customer_group[{{ customer_group_row }}][customer_group_id]" value="{{ customer_group.customer_group_id }}" checked="checked" class="form-check-input"/>
+												<input type="checkbox" name="custom_field_customer_group[{{ customer_group_row }}][customer_group_id]" value="{{ customer_group.customer_group_id }}" class="form-check-input" checked="checked"/>
 												{{ customer_group.name }}
 											{% else %}
 												<input type="checkbox" name="custom_field_customer_group[{{ customer_group_row }}][customer_group_id]" value="{{ customer_group.customer_group_id }}" class="form-check-input"/>
@@ -154,7 +154,7 @@
 									{% for customer_group in customer_groups %}
 										<label class="form-check">
 											{% if customer_group.customer_group_id in custom_field_required %}
-												<input type="checkbox" name="custom_field_customer_group[{{ customer_group_row }}][required]" value="{{ customer_group.customer_group_id }}" checked="checked" class="form-check-input"/>
+												<input type="checkbox" name="custom_field_customer_group[{{ customer_group_row }}][required]" value="{{ customer_group.customer_group_id }}" class="form-check-input" checked="checked"/>
 												{{ customer_group.name }}
 											{% else %}
 												<input type="checkbox" name="custom_field_customer_group[{{ customer_group_row }}][required]" value="{{ customer_group.customer_group_id }}" class="form-check-input"/>
@@ -184,7 +184,7 @@
 							<label for="input-sort-order" class="col-sm-2 col-form-label">{{ entry_sort_order }}</label>
 							<div class="col-sm-10">
 								<input type="text" name="sort_order" value="{{ sort_order }}" placeholder="{{ entry_sort_order }}" id="input-sort-order" class="form-control"/>
-								<small class="form-text text-muted">{{ help_sort_order }}</small>
+								<div class="form-text text-muted">{{ help_sort_order }}</div>
 							</div>
 						</div>
 					</fieldset>

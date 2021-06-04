@@ -3,7 +3,7 @@
 	<div class="page-header">
 		<div class="container-fluid">
 			<div class="float-end">
-				<button type="button" data-oc-action="{{ save }}" data-oc-form="#customer-group-form" data-bs-toggle="tooltip" title="{{ button_save }}" class="btn btn-primary"><i class="fas fa-save"></i></button>
+				<button type="button" data-oc-action="{{ save }}" data-oc-form="#form-customer-group" data-bs-toggle="tooltip" title="{{ button_save }}" class="btn btn-primary"><i class="fas fa-save"></i></button>
 				<a href="{{ back }}" data-bs-toggle="tooltip" title="{{ button_back }}" class="btn btn-light"><i class="fas fa-reply"></i></a></div>
 			<h1>{{ heading_title }}</h1>
 			<ol class="breadcrumb">
@@ -17,7 +17,7 @@
 		<div class="card">
 			<div class="card-header"><i class="fas fa-pencil-alt"></i> {{ text_form }}</div>
 			<div class="card-body">
-				<form id="customer-group-form">
+				<form id="form-customer-group">
 					<input type="hidden" name="customer_group_id" value="{{ customer_group_id }}" id="input-customer-group-id"/>
 					<div class="row mb-3 required">
 						<label class="col-sm-2 col-form-label">{{ entry_name }}</label>
@@ -44,16 +44,16 @@
 					<div class="row mb-3">
 						<label class="col-sm-2 col-form-label">{{ entry_approval }}</label>
 						<div class="col-sm-10">
-							<div class="btn-group btn-group-toggle" data-bs-toggle="buttons">
+							<div class="btn-group">
 								{% if approval %}
-									<label class="btn btn-outline-secondary active"><input type="radio" name="approval" value="1" checked="checked"/> {{ text_yes }}</label>
-									<label class="btn btn-outline-secondary"><input type="radio" name="approval" value="0"/> {{ text_no }}</label>
+									<label class="btn btn-outline-secondary active"><input type="radio" name="approval" value="1" class="btn-check" checked="checked"/> {{ text_yes }}</label>
+									<label class="btn btn-outline-secondary"><input type="radio" name="approval" value="0" class="btn-check"/> {{ text_no }}</label>
 								{% else %}
-									<label class="btn btn-outline-secondary"><input type="radio" name="approval" value="1"/> {{ text_yes }}</label>
-									<label class="btn btn-outline-secondary active"><input type="radio" name="approval" value="0" checked="checked"/> {{ text_no }}</label>
+									<label class="btn btn-outline-secondary"><input type="radio" name="approval" value="1" class="btn-check"/> {{ text_yes }}</label>
+									<label class="btn btn-outline-secondary active"><input type="radio" name="approval" value="0" class="btn-check" checked="checked"/> {{ text_no }}</label>
 								{% endif %}
 							</div>
-							<small class="form-text text-muted">{{ help_approval }}</small>
+							<div class="form-text text-muted">{{ help_approval }}</div>
 						</div>
 					</div>
 					<div class="row mb-3">

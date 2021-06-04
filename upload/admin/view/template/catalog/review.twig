@@ -17,18 +17,19 @@
 	</div>
 	<div class="container-fluid">
 		<div class="row">
-			<div id="filter-review" class="col-md-3 col-sm-12 order-md-9 d-none d-md-block mb-3">
+			<div id="filter-review" class="col-md-3 col-sm-12  order-lg-last d-none d-md-block mb-3">
 				<div class="card">
 					<div class="card-header"><i class="fas fa-filter"></i> {{ text_filter }}</div>
 					<div class="card-body">
 						<div class="mb-3">
-							<label for="input-product" class="col-form-label">{{ entry_product }}</label> <input type="text" name="filter_product" value="{{ filter_product }}" placeholder="{{ entry_product }}" id="input-product" class="form-control"/>
+							<label for="input-product" class="form-label">{{ entry_product }}</label>
+							<input type="text" name="filter_product" value="{{ filter_product }}" placeholder="{{ entry_product }}" id="input-product" class="form-control"/>
 						</div>
 						<div class="mb-3">
-							<label for="input-author" class="col-form-label">{{ entry_author }}</label> <input type="text" name="filter_author" value="{{ filter_author }}" placeholder="{{ entry_author }}" id="input-author" class="form-control"/>
+							<label for="input-author" class="form-label">{{ entry_author }}</label> <input type="text" name="filter_author" value="{{ filter_author }}" placeholder="{{ entry_author }}" id="input-author" class="form-control"/>
 						</div>
 						<div class="mb-3">
-							<label for="input-status" class="col-form-label">{{ entry_status }}</label> <select name="filter_status" id="input-status" class="form-select">
+							<label for="input-status" class="form-label">{{ entry_status }}</label> <select name="filter_status" id="input-status" class="form-select">
 								<option value=""></option>
 								{% if filter_status == '1' %}
 									<option value="1" selected="selected">{{ text_enabled }}</option>
@@ -43,13 +44,13 @@
 							</select>
 						</div>
 						<div class="mb-3">
-							<label for="input-date-added" class="col-form-label">{{ entry_date_added }}</label>
+							<label for="input-date-added" class="form-label">{{ entry_date_added }}</label>
 							<div class="input-group date">
 								<input type="text" name="filter_date_added" value="{{ filter_date_added }}" placeholder="{{ entry_date_added }}" id="input-date-added" class="form-control"/>
 								<div class="input-group-text"><i class="fas fa-calendar"></i></div>
 							</div>
 						</div>
-						<div class="mb-3 text-end">
+						<div class="text-end">
 							<button type="button" id="button-filter" class="btn btn-light"><i class="fas fa-filter"></i> {{ button_filter }}</button>
 						</div>
 					</div>
