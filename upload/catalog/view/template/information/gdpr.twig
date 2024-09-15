@@ -6,7 +6,7 @@
 		{% endfor %}
 	</ul>
 	{% if success %}
-		<div class="alert alert-success alert-dismissible"><i class="fas fa-check-circle"></i> {{ success }} <button type="button" class="close" data-dismiss="alert">&times;</button></div>
+		<div class="alert alert-success alert-dismissible"><i class="fas fa-check-circle"></i> {{ success }} <button type="button" class="btn-close" data-dismiss="alert"></button></div>
 	{% endif %}
 	<div class="row">{{ column_left }}
 		<div id="content" class="col">
@@ -19,9 +19,7 @@
 					<p><label for="input-email" class="form-check-label">{{ text_email }}</label></p>
 					<div class="input-group">
 						<input type="text" name="email" value="{{ email }}" placeholder="{{ entry_email }}" id="input-email" class="form-control"/>
-						<div class="input-group-append">
-							<span class="input-group-text"><i class="fas fa-envelope"></i></span>
-						</div>
+						<div class="input-group-text"><i class="fas fa-envelope"></i></div>
 					</div>
 				</div>
 			</fieldset>
@@ -85,12 +83,12 @@ $('#button-continue').on('click', function() {
                 }
 
                 if (json['error']['action']) {
-                    $('#action').after('<div class="alert alert-danger alert-dismissible"><i class="fas fa-exclamation-circle"></i> ' + json['error']['action'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+                    $('#action').after('<div class="alert alert-danger alert-dismissible"><i class="fas fa-exclamation-circle"></i> ' + json['error']['action'] + ' <button type="button" class="btn-close" data-dismiss="alert"></button></div>');
                 }
             }
 
             if (json['success']) {
-                $('.breadcrumb').after('<div class="alert alert-success alert-dismissible"><i class="fas fa-exclamation-circle"></i> ' + json['success'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+                $('.breadcrumb').after('<div class="alert alert-success alert-dismissible"><i class="fas fa-exclamation-circle"></i> ' + json['success'] + ' <button type="button" class="btn-close" data-dismiss="alert"></button></div>');
             }
         },
         error: function(xhr, ajaxOptions, thrownError) {

@@ -30,7 +30,7 @@
 									{% endif %}
 								{% endfor %}
 							</select>
-							<small class="form-text text-muted">{{ help_order_status }}</small>
+							<div class="form-text text-muted">{{ help_order_status }}</div>
 						</div>
 					</div>
 					<div class="row mb-3">
@@ -54,9 +54,7 @@
 							<div class="col-sm-10">
 								<div class="input-group">
 									<input type="text" value="" id="input-ip" placeholder="{{ entry_ip }}" class="form-control"/>
-									<div class="input-group-append">
-										<button class="btn btn-primary" data-loading-text="{{ text_loading }}" id="button-ip-add" type="button">{{ button_ip_add }}</button>
-									</div>
+									<button class="btn btn-primary" data-loading-text="{{ text_loading }}" id="button-ip-add" type="button">{{ button_ip_add }}</button>
 								</div>
 							</div>
 						</div>
@@ -96,11 +94,11 @@ $('#button-ip-add').on('click', function() {
             $('.alert-dismissible').remove();
 
             if (json['error']) {
-                $('#content > .container-fluid').prepend('<div class="alert alert-danger alert-dismissible"><i class="fas fa-exclamation-circle"></i> ' + json['error'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+                $('#content > .container-fluid').prepend('<div class="alert alert-danger alert-dismissible"><i class="fas fa-exclamation-circle"></i> ' + json['error'] + ' <button type="button" class="btn-close" data-dismiss="alert"></button></div>');
             }
 
             if (json['success']) {
-                $('#content > .container-fluid').prepend('<div class="alert alert-success alert-dismissible"><i class="fas fa-check-circle"></i> ' + json['success'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+                $('#content > .container-fluid').prepend('<div class="alert alert-success alert-dismissible"><i class="fas fa-check-circle"></i> ' + json['success'] + ' <button type="button" class="btn-close" data-dismiss="alert"></button></div>');
 
                 $('#ip').load('index.php?route=extension/opencart/fraud/ip|ip&user_token={{ user_token }}');
 
@@ -131,11 +129,11 @@ $('#ip').on('click', 'button', function() {
             $('.alert-dismissible').remove();
 
             if (json['error']) {
-                $('#content > .container-fluid').prepend('<div class="alert alert-danger alert-dismissible"><i class="fas fa-exclamation-circle"></i> ' + json['error'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+                $('#content > .container-fluid').prepend('<div class="alert alert-danger alert-dismissible"><i class="fas fa-exclamation-circle"></i> ' + json['error'] + ' <button type="button" class="btn-close" data-dismiss="alert"></button></div>');
             }
 
             if (json['success']) {
-                $('#content > .container-fluid').prepend('<div class="alert alert-success alert-dismissible"><i class="fas fa-check-circle"></i> ' + json['success'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+                $('#content > .container-fluid').prepend('<div class="alert alert-success alert-dismissible"><i class="fas fa-check-circle"></i> ' + json['success'] + ' <button type="button" class="btn-close" data-dismiss="alert"></button></div>');
 
                 $('#ip').load('index.php?route=extension/opencart/fraud/ip|ip&user_token={{ user_token }}');
             }
